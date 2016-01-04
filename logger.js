@@ -5,6 +5,7 @@ var fs				 = require('fs')
 
 var logdir     = process.env.LOGDIR || __dirname
 var logfile    = process.env.LOGFILE || path.basename(process.mainModule.filename).replace('.js','') || path.basename(__dirname);
+var esurl	= process.env.ELASTICSEARCH || false
 
 // Configure winston as logger
 var logger = new (winston.Logger)({
