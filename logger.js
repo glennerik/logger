@@ -8,6 +8,11 @@ var logdir     = argv.LOGDIR || process.env.LOGDIR || __dirname
 var logfile    = argv.LOGFILE || process.env.LOGFILE || path.basename(process.mainModule.filename).replace('.js','') || path.basename(__dirname);
 var esurl	     = argv.ELASTICSEARCH || process.env.ELASTICSEARCH || false
 
+console.log("Hi from logger.js")
+console.log("logdir: " + logdir)
+console.log("logfile: " + logfile)
+console.log("esurl: " + esurl)
+
 // Configure winston as logger
 var logger = new (winston.Logger)({
   transports: [
