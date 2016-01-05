@@ -1,11 +1,12 @@
-var winston		 = require('winston')
-var morgan     = require('morgan')
-var path       = require('path')
-var fs				 = require('fs')
+var winston		= require('winston')
+var morgan    = require('morgan')
+var path      = require('path')
+var fs				= require('fs')
+var argv      = require('minimist')(process.argv.slice(2))
 
-var logdir     = process.env.LOGDIR || __dirname
-var logfile    = process.env.LOGFILE || path.basename(process.mainModule.filename).replace('.js','') || path.basename(__dirname);
-var esurl	= process.env.ELASTICSEARCH || false
+var logdir     = argv.LOGDIR || process.env.LOGDIR || __dirname
+var logfile    = argv.LOGFILE || process.env.LOGFILE || path.basename(process.mainModule.filename).replace('.js','') || path.basename(__dirname);
+var esurl	     = argv.ELASTICSEARCH || process.env.ELASTICSEARCH || false
 
 // Configure winston as logger
 var logger = new (winston.Logger)({
