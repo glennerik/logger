@@ -4,7 +4,7 @@
   "description": "",
   "main": "logger.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node loggerTest.js --LOGDIR=/docker/logs --LOGFILE=loggerTest --LOGSTASH"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,6 @@
   "dependencies": {
     "minimist": "^1.2.0",
     "morgan": "^1.6.1",
-    "winston": "^2.1.1",
-    "winston-elasticsearch": "^0.2.5"
+    "winston": "^2.1.1"
   }
 }

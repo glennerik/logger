@@ -7,6 +7,7 @@ var argv      = require('minimist')(process.argv.slice(2))
 var logdir     = argv.LOGDIR || process.env.LOGDIR || __dirname
 var logfile    = argv.LOGFILE || process.env.LOGFILE || path.basename(process.mainModule.filename).replace('.js','') || path.basename(__dirname);
 var esurl	     = argv.ELASTICSEARCH || process.env.ELASTICSEARCH || false
+var logstash   = argv.LOGSTASH || false
 
 // Configure winston as logger
 var logger = new (winston.Logger)({
@@ -19,19 +20,13 @@ var logger = new (winston.Logger)({
     new winston.transports.File({
       filename: logdir + '/' + logfile + '-winston.log',
       json: false ,
-      // logstash: true,
+      logstash: logstash,
       timestamp: true,
       maxsize: 1024000, // maxsize in bytes of each logfile
       maxFiles: 1
     }),
-    // new winston.transports.Http({
-    //   host: 'log.bfdev.vk1881.no',
-    //   port: 80,
-    //   // path: '/log/v1_0/simplelogservice.svc/xml/LogPost'
-    //   path: '/log/v1_0/simplelogservice.svc/xml/Log/'
-    //   // path: '/log/v1_0/simplelogservice.svc/xml/Log/?level=info&namespace=glennspace&msg=glennmsg28&host=pcdevglenn&version=1.1&requestId=abcdef123'
-    // })
   ],
+
   exceptionHandlers: [
     new (winston.transports.Console)({
       json: false,
@@ -48,8 +43,8 @@ var logger = new (winston.Logger)({
   ],
   exitOnError: false
 });
-module.exports = logger;
 
+module.exports = logger;
 
 // configure morgan as morgan
 var accessLogStream = fs.createWriteStream(logdir + '/' + logfile + "-morgan.log", {flags: 'a'})
